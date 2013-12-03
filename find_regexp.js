@@ -11,30 +11,30 @@ var findRegExpBar = function() {
         this.matchIndex = 0;
         this.regularExpression;
         this.searchFieldMatches;
-                this.goToMatch = function(event, next, obj) {
-                    try {
-                        window.getSelection().removeAllRanges();
-                        document.body.scrollIntoView(true);
-                        if (next) {
-                            obj.matchIndex = (obj.matchIndex === obj.matchRanges.length ? 1 : obj.matchIndex + 1);
-                        } else {
-                            obj.matchIndex = (obj.matchIndex === 1 ? obj.matchRanges.length : obj.matchIndex - 1);
-                        }
-                        window.getSelection().addRange(obj.matchRanges[obj.matchIndex - 1]);
-                        //                         var obj.bcr = obj.matchRanges[obj.matchIndex].getBoundingClientRect();
-                        if (window.getSelection().rangeCount === 1) {
-                            obj.bcr = window.getSelection().getRangeAt(0).getBoundingClientRect();
-                            window.scrollTo(obj.bcr.left - window.innerWidth / 2, obj.bcr.top - window.innerHeight / 2);
-                            // console.log(obj.bcr);
-                            console.log(obj.matchIndex);
-                            obj.searchFieldMatches.innerText = obj.matchRanges.length > 0 ? (obj.matchIndex + " of " + obj.matchRanges.length) : 'no match'; //$NON-NLS-1$ //$NON-NLS-0$
-                        } else {
-                            console.log('unexpected rangeCount', window.getSelection().rangeCount, obj.matchRanges[obj.matchIndex - 1]); //$NON-NLS-0$
-                        }
-                    } catch (exception) {
-                        console.error(exception.stack);
-                    }
-                };
+        this.goToMatch = function(event, next, obj) {
+            try {
+                window.getSelection().removeAllRanges();
+                document.body.scrollIntoView(true);
+                if (next) {
+                    obj.matchIndex = (obj.matchIndex === obj.matchRanges.length ? 1 : obj.matchIndex + 1);
+                } else {
+                    obj.matchIndex = (obj.matchIndex === 1 ? obj.matchRanges.length : obj.matchIndex - 1);
+                }
+                window.getSelection().addRange(obj.matchRanges[obj.matchIndex - 1]);
+                //                         var obj.bcr = obj.matchRanges[obj.matchIndex].getBoundingClientRect();
+                if (window.getSelection().rangeCount === 1) {
+                    obj.bcr = window.getSelection().getRangeAt(0).getBoundingClientRect();
+                    window.scrollTo(obj.bcr.left - window.innerWidth / 2, obj.bcr.top - window.innerHeight / 2);
+                    // console.log(obj.bcr);
+                    console.log(obj.matchIndex);
+                    obj.searchFieldMatches.innerText = obj.matchRanges.length > 0 ? (obj.matchIndex + " of " + obj.matchRanges.length) : 'no match'; //$NON-NLS-1$ //$NON-NLS-0$
+                } else {
+                    console.log('unexpected rangeCount', window.getSelection().rangeCount, obj.matchRanges[obj.matchIndex - 1]); //$NON-NLS-0$
+                }
+            } catch (exception) {
+                console.error(exception.stack);
+            }
+        };
         this.catchFind = function() {
             try {
                 //                if (event.keyIdentifier === "U+0006") { //$NON-NLS-0$
@@ -111,14 +111,9 @@ var findRegExpBar = function() {
                 this.searchBox.addEventListener('keypress', function(event) { //$NON-NLS-0$
                     try {
                         console.log(event.keyIdentifier);
-                        //                             if (!event.ctrlKey && event.shiftKey && event.keyIdentifier === 'Space') {
-                        //                                                         goToMatch(event, ! "next");
-                        //                             }
-                        //                             if (!event.ctrlKey && !event.shiftKey && event.keyIdentifier === 'Space') {
-                        //                                                         goToMatch(event, !! "next");
-                        //                             }
                         if (event.keyIdentifier === 'Enter' || event.keyCode === 13) {
-                            this.searchRegExp(this.searchField.value, (this.searchFlagGlobal.checked ? "g" : "") + (this.searchFlagIgnoreCase.checked ? "i" : "") + (this.searchFlagMultiLine.checked ? "m" : ""));
+                            //NOTE We always wat a global search
+                            my.searchRegExp(my.searchField.value, true || my.searchFlagGlobal.checked, my.searchFlagIgnoreCase.checked, my.searchFlagMultiLine.checked);
                         };
                     } catch (exception) {
                         console.error(exception.stack);
@@ -126,16 +121,18 @@ var findRegExpBar = function() {
                 }, false);
                 this.searchField.placeholder = "\\w+\\s+\\d+"; //$NON-NLS-0$
                 this.searchBox.appendChild(this.searchField);
-                this.searchBox.appendChild(this.searchFlagGlobal);
-                this.searchBox.appendChild(this.searchFlagGlobalLabel);
+                //                this.searchBox.appendChild(this.searchFlagGlobal);
+                //                this.searchBox.appendChild(this.searchFlagGlobalLabel);
                 this.searchBox.appendChild(this.searchFlagIgnoreCase);
                 this.searchBox.appendChild(this.searchFlagIgnoreCaseLabel);
                 this.searchBox.appendChild(this.searchFlagMultiLine);
                 this.searchBox.appendChild(this.searchFlagMultiLineLabel);
                 this.searchBox.appendChild(this.searchFieldMatches);
-                this.searchFieldMatches.style.backgroundColor = window.getComputedStyle(document.body).backgroundColor;
+                this.searchBox.style.backgroundColor = window.getComputedStyle(document.body).backgroundColor;
                 this.searchFieldMatches.style.margin = "0 6px"; //$NON-NLS-0$
-                this.searchFieldMatches.style.opacity = 0.7;
+                this.searchFieldMatches.style.width = "5em"; //$NON-NLS-0$
+                this.searchFieldMatches.style.display = "inline-block"; //$NON-NLS-0$
+                this.searchBox.style.opacity = 0.9;
                 this.searchBox.appendChild(this.searchPrevious);
                 this.searchBox.appendChild(this.searchNext);
                 this.searchBox.appendChild(this.searchClose);
@@ -192,9 +189,12 @@ var findRegExpBar = function() {
             //                                 var exp = event.target.value.match(/^(\s*\/)?(.+?)(?:\/([gim]*))?\s*$/);
             this.regularExpression = new RegExp(text, (global ? "g" : "") + (ignoreCase ? "i" : "") + (multiline ? "m" : "")); //$NON-NLS-4$ //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
             //             window.alert(JSON.stringify(document.body.textContent.match(new RegExp(event.target.value, "g")), null, 2));
-            var tmp = text;
-            text = "";
+            //NOTE We don't want to match searchField contents!
+            this.searchField.value = "";
             this.matches = document.body.textContent.match(this.regularExpression);
+            if (false && this.matches.length > 100 && !window.confirm('Do you want to see ' + this.matches.length + ' matches for "' + text + '"?')) {
+                return;
+            }
             console.log(JSON.stringify(this.matches, null, 2));
             window.getSelection().removeAllRanges();
             this.matchIndex = 0;
@@ -202,36 +202,14 @@ var findRegExpBar = function() {
             this.matchRangesByMatch = {};
             //Now I know what thisArg is for!
             this.matches && this.matches.forEach(this.iterateOverMatches, this);
-            text = tmp;
+            this.searchField.value = text;
             // window.getSelection().removeAllRanges();
             // document.body.scrollIntoView(true);
             console.log(this.matchRangesByMatch);
             console.log(this.matchRanges);
             this.searchFieldMatches.innerText = this.matchRanges.length > 0 ? (this.matchIndex + " of " + this.matchRanges.length) : 'no match'; //$NON-NLS-1$ //$NON-NLS-0$
         };
-        window.addEventListener('keypress', this.catchFind, false); //$NON-NLS-0$
-        // This event is fired with the user accepts the input in the omnibox.
-        //        "currentTab", "newForegroundTab", or "newBackgroundTab"
-        //var presentOmniboxResult = function(text, context) {
-        //    switch (text.length) {
-        //        case 1:
-        //        break;
-        //        case 2:
-        //        break;
-        //        case 3:
-        //        break;
-        //        }
-        //        window.alert(JSON.stringify([text, context], null, 4));
-        //};
-        //        chrome.omnibox.onInputEntered.addListener(
-        //        presentOmniboxResult
-        //        function(text, presentOmniboxResult) {
-        //            console.log('inputEntered: ' + text);
-        //            window.alert('You just typed "' + text + '"');
-        //            catchFind();
-        //            searchRegExp(text, "global", "ignoreCase", "multiLine");
-        //        }
-        //        );
+        //        window.addEventListener('keypress', this.catchFind, false); //$NON-NLS-0$
     } catch (exception) {
         console.error(exception.stack);
     }

@@ -1,4 +1,8 @@
 {
+    "re_view_menu_item": {
+        "message": "Review tabs matching '%s'",
+        "description": "Review tabs matching '%s'"
+    },
     "alert_chrome_update": {
         "message": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$",
         "description": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$",

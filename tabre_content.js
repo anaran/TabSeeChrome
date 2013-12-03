@@ -8,30 +8,32 @@
     //console.timeEnd(loading);
     //console.log("Reload it with Ctrl+R or as follows:\nlocation.reload(true)");
     //console.log("injection into " + document.URL + " in\n" + JSON.stringify(navigator.userAgent) + "\nends at\n" + JSON.stringify(Date()));
-//    document.addEventListener('readystatechange', function(event) {
-//        if (event.target.readyState !== "complete") {
-//            return;
-//        }
-        chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-            if (message.text) {
-                var exactMatches = document.body.textContent.match(new RegExp(message.text, "g"));
-                if (exactMatches.length < 100) {
-                    var ignoreCaseMatches = document.body.textContent.match(new RegExp(message.text, "gi"));
-                }
+    //    document.addEventListener('readystatechange', function(event) {
+    //        if (event.target.readyState !== "complete") {
+    //            return;
+    //        }
+    chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+        if (message.text && document.body) {
+            var exactMatches = document.body.textContent.match(new RegExp(message.text, "g"));
+            //                if (exactMatches.length < 100) {
+            //                    var ignoreCaseMatches = document.body.textContent.match(new RegExp(message.text, "gi"));
+            //                }
+            if (message.todo === 'makeSuggestions') {
                 var suggest = [];
-                exactMatches.forEach(function(value, index) {
-                    suggest.push({
-                        'content': value,
-                            'description': 'exact "' + value + '" match ' + (index + 1) + ' of ' + exactMatches.length
-                    });
+                suggest.push({
+                    'content': location.href,
+                        'description': '<match>' + message.text + '</match> matches exactly ' + exactMatches.length + ' times in <url>' + location.href + '</url> <dim>' + document.title + '</dim>'
                 });
+                sendResponse(suggest);
+            }
+            if (message.todo === 'showSearchBox') {
                 var frb = new findRegExpBar();
                 frb.catchFind();
                 frb.searchRegExp(message.text, "global", !"ignoreCase", !"multiline");
-                sendResponse(suggest);
             }
-        });
-//    }, false);
+        }
+    });
+    //    }, false);
     console.timeEnd(loading);
     console.log("Reload it with Ctrl+R or as follows:\nlocation.reload(true)");
     console.log("injection into " + document.URL + " in\n" + JSON.stringify(navigator.userAgent) + "\nends at\n" + JSON.stringify(Date()));

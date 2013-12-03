@@ -4,6 +4,7 @@
 (function() {
     var loading = "loading started at " + new Error().stack.split(/\s+/)[2] + "\n(" + (chrome.app.getDetails() && chrome.app.getDetails().name || "no chrome.app.getDetails()") + ") takes";
     console.time(loading);
+    var inputText = '';
     //TODO Place following code where timed section should end.
     //console.timeEnd(loading);
     //console.log("Reload it with Ctrl+R or as follows:\nlocation.reload(true)");
@@ -26,7 +27,7 @@
     //setDefaultSuggestion
     //
     chrome.omnibox.setDefaultSuggestion({
-        'description': 'description for chrome.omnibox.setDefaultSuggestion'
+        'description': 'Please enter a string or regular expression of at least 4 characters'
     });
     //Sets the description and styling for the default suggestion. The default suggestion is the text that is displayed in the first suggestion row underneath the URL bar.
     //
@@ -66,25 +67,23 @@
     chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
         console.log(text, suggest);
         if (text.length > 3) {
+            inputText = text;
             chrome.tabs.query({
-                active: true,
+                //                active: true,
                 currentWindow: true,
                 status: "complete"
             }, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    text: text
-                }, function(response) {
-                    console.log(response);
-                    if (response) {
-                        suggest(response);
-                    }
-                    //    suggest([{
-                    //        content: "c",
-                    //        description: 'description c'
-                    //    }, {
-                    //        content: "d",
-                    //        description: 'description d'
-                    //    }]);
+                console.log((new Error()).stack.split('\n'));
+                tabs.forEach(function(tab) {
+                    chrome.tabs.sendMessage(tab.id, {
+                        text: text,
+                        todo: 'makeSuggestions'
+                    }, function(response) {
+                        console.log(response);
+                        if (response) {
+                            suggest(response);
+                        }
+                    });
                 });
             });
         }
@@ -107,7 +106,23 @@
     //addListener
     //
     chrome.omnibox.onInputEntered.addListener(function(text, disposition) {
-        console.log(text, disposition); /*alert(JSON.stringify({text, disposition}, null, 2));*/
+        //        console.log(text, disposition); /*alert(JSON.stringify({text, disposition}, null, 2));*/
+        chrome.tabs.query({
+            url: text
+        }, function(tabs) {
+                    chrome.tabs.sendMessage(tabs[0].id, {
+                        text: inputText,
+                        todo: 'showSearchBox'
+                    }, function(response) {
+                        console.log(response);
+                        if (response) {
+                            console.log(response);
+                        }
+                    });
+            chrome.tabs.update(tabs[0].id, {
+                active: true
+            });
+        });
     });
     //Parameters
     //
