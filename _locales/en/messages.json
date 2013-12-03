@@ -1,0 +1,92 @@
+{
+    "alert_chrome_update": {
+        "message": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$",
+        "description": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "example": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$"
+            },
+            "reason": {
+                "content": "$3",
+                "example": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$"
+            },
+            "name": {
+                "content": "$2",
+                "example": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$"
+            },
+            "lasterror": {
+                "content": "$5",
+                "example": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$"
+            },
+            "navigatorversion": {
+                "content": "$4",
+                "example": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$"
+            }
+        }
+    },
+    "alert_install": {
+        "message": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$",
+        "description": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "example": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$"
+            },
+            "reason": {
+                "content": "$2",
+                "example": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$"
+            },
+            "name": {
+                "content": "$3",
+                "example": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$"
+            },
+            "version": {
+                "content": "$4",
+                "example": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$"
+            },
+            "lasterror": {
+                "content": "$5",
+                "example": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$"
+            }
+        }
+    },
+    "alert_update": {
+        "message": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$",
+        "description": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "example": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$"
+            },
+            "reason": {
+                "content": "$3",
+                "example": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$"
+            },
+            "name": {
+                "content": "$2",
+                "example": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$"
+            },
+            "version": {
+                "content": "$5",
+                "example": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$"
+            },
+            "lasterror": {
+                "content": "$6",
+                "example": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$"
+            },
+            "previousversion": {
+                "content": "$4",
+                "example": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$"
+            }
+        }
+    },
+    "extension_description": {
+        "message": "Search Tab(s) by Regular Expression",
+        "description": "Shows position after scrolling (by line ↡, or by page ⇓) for better reading continuity."
+    },
+    "extension_name": {
+        "message": "tabre",
+        "description": "Last Scroll"
+    }
+}

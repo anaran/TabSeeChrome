@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+        "name": "__MSG_extension_name__",
+        "version": "1",
+        "minimum_chrome_version": "29.0.1521.3",
+        "content_scripts": [{
+        "all_frames": true,
+            "matches": [
+            "<all_urls>"],
+            "js": [
+            "find_regexp.js",
+            "tabre_content.js"]
+    }],
+        "default_locale": "en",
+        "description": "__MSG_extension_description__",
+        "icons": {
+        "48": "lastscroll4_48x48.png",
+            "128": "lastscroll4_128x128.png"
+    },
+        "web_accessible_resources": ["lastscroll4_48x48.png",
+        "lastscroll4_128x128.png"],
+        "omnibox": {
+        "keyword": "re"
+    },
+        "optional_permissions": ["tabs"],
+        "permissions": [
+        "contextMenus"],
+        "background": {
+        "scripts": ["tabre_omnibox.js",
+            "tabre_menu.js"],
+            "persistent": false
+    }
+}
