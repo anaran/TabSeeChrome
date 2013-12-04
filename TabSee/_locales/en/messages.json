@@ -87,7 +87,7 @@
     },
     "extension_description": {
         "message": "Search Tabs by Regular Expression (using ts Keyword in Omnibox) or Selection in Context Menu (current Tab only)",
-        "description": "Shows position after scrolling (by line ↡, or by page ⇓) for better reading continuity."
+        "description": "Search Tabs by Regular Expression (using ts Keyword in Omnibox) or Selection in Context Menu (current Tab only)"
     },
     "extension_name": {
         "message": "TabSee",

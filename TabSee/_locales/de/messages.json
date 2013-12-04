@@ -1,6 +1,10 @@
 {
+    "re_view_menu_item": {
+        "message": "Type 'ts TAB' in addressbar to find '%s' in other tabs",
+        "description": "Type 'ts TAB' in addressbar to find '%s' in other tabs"
+    },
     "alert_chrome_update": {
-        "message": "$Date$\n\n$Name$ hat soeben ein $Reason$ auf Version $NavigatorVersion$ miterlebt\n$LastError$",
+        "message": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$",
         "description": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$",
         "placeholders": {
             "date": {
@@ -26,7 +30,7 @@
         }
     },
     "alert_install": {
-        "message": "$Date$\n\nWilkommen zu diesem neuen $Reason$ von $Name$ Version $Version$\n$LastError$",
+        "message": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$",
         "description": "$Date$\n\nWelcome to this new $Reason$ of $Name$ version $Version$\n$LastError$",
         "placeholders": {
             "date": {
@@ -52,7 +56,7 @@
         }
     },
     "alert_update": {
-        "message": "$Date$\n\n$Name$ hat ein $Reason$ von Version $PreviousVersion$ auf $Version$ erhalten\n$LastError$",
+        "message": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$",
         "description": "$Date$\n\n$Name$ got an $Reason$ from version $PreviousVersion$ to $Version$\n$LastError$",
         "placeholders": {
             "date": {
@@ -82,11 +86,11 @@
         }
     },
     "extension_description": {
-        "message": "Zeigt die Position nach dem Rollen (um Zeile ↡, oder um Seite ⇓) zum schnelleren weiterlesen an.",
-        "description": "Shows position after scrolling (by line ↡, or by page ⇓) for better reading continuity."
+        "message": "Search Tabs by Regular Expression (using ts Keyword in Omnibox) or Selection in Context Menu (current Tab only)",
+        "description": "Search Tabs by Regular Expression (using ts Keyword in Omnibox) or Selection in Context Menu (current Tab only)"
     },
     "extension_name": {
-        "message": "Last Scroll",
-        "description": "Last Scroll"
+        "message": "TabSee",
+        "description": "TabSee"
     }
 }
