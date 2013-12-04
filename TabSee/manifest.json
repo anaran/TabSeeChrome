@@ -18,7 +18,7 @@
             "128": "tabsee128x128.png"
     },
         "omnibox": {
-        "keyword": "re"
+        "keyword": "ts"
     },
         "optional_permissions": ["tabs"],
         "permissions": [

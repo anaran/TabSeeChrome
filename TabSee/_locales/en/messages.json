@@ -1,7 +1,7 @@
 {
     "re_view_menu_item": {
-        "message": "Type 're TAB' in addressbar to find '%s' in oher tabs",
-        "description": "Review tabs matching '%s'"
+        "message": "Type 'ts TAB' in addressbar to find '%s' in other tabs",
+        "description": "Type 'ts TAB' in addressbar to find '%s' in other tabs"
     },
     "alert_chrome_update": {
         "message": "$Date$\n\n$Name$ witnessed a $Reason$ to version $NavigatorVersion$\n$LastError$",
@@ -86,11 +86,11 @@
         }
     },
     "extension_description": {
-        "message": "Search Tab(s) by Regular Expression",
+        "message": "Search Tabs by Regular Expression (using ts Keyword in Omnibox) or Selection in Context Menu (current Tab only)",
         "description": "Shows position after scrolling (by line ↡, or by page ⇓) for better reading continuity."
     },
     "extension_name": {
-        "message": "tabsee",
-        "description": "Last Scroll"
+        "message": "TabSee",
+        "description": "TabSee"
     }
 }
