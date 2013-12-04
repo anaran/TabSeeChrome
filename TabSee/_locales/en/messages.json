@@ -1,6 +1,6 @@
 {
     "re_view_menu_item": {
-        "message": "Review tabs matching '%s'",
+        "message": "Type 're TAB' in addressbar to find '%s' in oher tabs",
         "description": "Review tabs matching '%s'"
     },
     "alert_chrome_update": {
@@ -90,7 +90,7 @@
         "description": "Shows position after scrolling (by line ↡, or by page ⇓) for better reading continuity."
     },
     "extension_name": {
-        "message": "tabre",
+        "message": "tabsee",
         "description": "Last Scroll"
     }
 }

@@ -9,16 +9,14 @@
             "<all_urls>"],
             "js": [
             "find_regexp.js",
-            "tabre_content.js"]
+            "tabsee_content.js"]
     }],
         "default_locale": "en",
         "description": "__MSG_extension_description__",
         "icons": {
-        "48": "lastscroll4_48x48.png",
-            "128": "lastscroll4_128x128.png"
+        "48": "tabsee48x48.png",
+            "128": "tabsee128x128.png"
     },
-        "web_accessible_resources": ["lastscroll4_48x48.png",
-        "lastscroll4_128x128.png"],
         "omnibox": {
         "keyword": "re"
     },
@@ -26,8 +24,8 @@
         "permissions": [
         "contextMenus"],
         "background": {
-        "scripts": ["tabre_omnibox.js",
-            "tabre_menu.js"],
+        "scripts": ["tabsee_omnibox.js",
+            "tabsee_menu.js"],
             "persistent": false
     }
 }
