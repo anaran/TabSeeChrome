@@ -110,17 +110,21 @@
         chrome.tabs.query({
             url: text
         }, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {
-                        text: inputText,
-                        todo: 'showSearchBox'
-                    }, function(response) {
-                        console.log(response);
-                        if (response) {
-                            console.log(response);
-                        }
-                    });
+            if (tabs.length === 0) {
+                window.prompt('tab did not respond to url query!', text);
+                return;
+            }
             chrome.tabs.update(tabs[0].id, {
                 active: true
+            });
+            chrome.tabs.sendMessage(tabs[0].id, {
+                text: inputText,
+                todo: 'showSearchBox'
+            }, function(response) {
+                console.log(response);
+                if (response) {
+                    console.log(response);
+                }
             });
         });
     });

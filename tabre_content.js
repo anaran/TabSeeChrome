@@ -13,18 +13,36 @@
     //            return;
     //        }
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-        if (message.text && document.body) {
-            var exactMatches = document.body.textContent.match(new RegExp(message.text, "g"));
-            //                if (exactMatches.length < 100) {
-            //                    var ignoreCaseMatches = document.body.textContent.match(new RegExp(message.text, "gi"));
-            //                }
+        //        New Tab has no document.title
+        if (message.text && document.title && document.body) {
+            var ignoreCaseMatches, exactMatches = document.body.textContent.match(new RegExp(message.text, "g"));
+            if (!exactMatches) {
+                ignoreCaseMatches = document.body.textContent.match(new RegExp(message.text, "gi"));
+            }
             if (message.todo === 'makeSuggestions') {
                 var suggest = [];
-                suggest.push({
-                    'content': location.href,
-                        'description': '<match>' + message.text + '</match> matches exactly ' + exactMatches.length + ' times in <url>' + location.href + '</url> <dim>' + document.title + '</dim>'
-                });
-                sendResponse(suggest);
+                var title = document.title;
+                //                NOTE Let's keep the query (search) part, which may specify locale and similar options.
+                var url = location.href.replace(location.hash, '');
+                //                var url = location.href.replace(location.hash, '').replace(location.search, '');
+                if (title.length > 50) {
+                    title = title.substring(0, 25) + '...' + title.substring(title.length - 25, title.length);
+                }
+                if (exactMatches) {
+                    suggest.push({
+                        'content': url,
+                        //                    '<url>' + location.href + '</url>+ '</dim>'
+                        'description': title + ' matches ' + '<match>' + message.text + '</match> ' + exactMatches.length + ' times' + ' (exact case)'
+                    });
+                    sendResponse(suggest);
+                } else if (ignoreCaseMatches) {
+                    suggest.push({
+                        'content': url,
+                        //                        'description': '<url>' + location.href + '</url> <dim>' + document.title + '</dim>'+' matches ' + '<match>' + message.text + '</match>' + ' (case mismatch) ' + ignoreCaseMatches.length + ' times'
+                        'description': title + ' matches ' + '<match>' + message.text + '</match> ' + ignoreCaseMatches.length + ' times' + ' (ignoring case)'
+                    });
+                    sendResponse(suggest);
+                }
             }
             if (message.todo === 'showSearchBox') {
                 var frb = new findRegExpBar();
